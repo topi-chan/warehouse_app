@@ -12,7 +12,10 @@ def index(request):
 def saldo(request):
     index_sum = request.POST['zmiana']
     index_commentary = request.POST['Komentarz']
+    # print(index_sum)
+    # print(index_commentary)
     s = Balance(sum = int(index_sum), commentary = index_commentary)
+    s.save()
     return redirect('index')
 
 #w render przekazać parametr oprócz request można jeszcze kolejne argsy
