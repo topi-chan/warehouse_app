@@ -22,6 +22,7 @@
     <div class="column col-lg-auto col-6">
 <p>
 <span class="label label-rounded label-primary">Kup lub sprzedaj produkt</span>
+  <form method="POST" action="zakup" >{% csrf_token %}
         <div class="form-group">
               <div class="col-6 col-sm-12">
         <select class="form-select">
@@ -30,14 +31,15 @@
           <option>Sprzedaż</option>
         </select>
         <label class="form-label" for="input-example-1">Nazwa</label>
-<input class="form-input" type="text" id="input-example-1" placeholder="Nazwa produktu">
+<input class="form-input" name="nazwa" type="text" id="input-example-1" placeholder="Nazwa produktu">
 <label class="form-label" for="input-example-1">Cena</label>
-<input class="form-input" type="number" id="input-example-1" placeholder="Cena produktu">
+<input class="form-input" name="cena" type="number" id="input-example-1" placeholder="Cena produktu">
 <label class="form-label" for="input-example-1">Liczba sztuk</label>
-<input class="form-input" type="number" id="input-example-1" placeholder="Liczba zakupionych sztuk produktu">
+<input class="form-input" type="number" name="sztuki" id="input-example-1" placeholder="Liczba zakupionych sztuk produktu">
       </div>
 </div>
-<a href="https://google.com" class="button"><button class="btn">Wykonaj</button></a>
+<button class="btn" type="submit">Wykonaj</button>
+</form>
 </p>
 <br><br>
 <form method="POST" action="saldo" >{% csrf_token %}
@@ -72,7 +74,15 @@
        <span class="label label-rounded label-primary">Stan magazynowy firmy</span>
      </p>
       <p>
-        <ul><li>Mac: 1</li><li>Raspberry: 2</li></ul>
+      {% if magazyn %}
+        <ul>
+          {% for item in magazyn %}
+            <li>{{ item.name }} : {{ item.qty }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Brak produktów w magazynie.</p>
+      {% endif %}
         <a href="https://google.com" class="button"><button class="btn">Odśwież</button></a>
       </p>
      </div>
@@ -81,14 +91,3 @@
 
 </body>
 </html>
-
-<!--
-# {% if latest_question_list %}
-#     <ul>
-#     {% for question in latest_question_list %}
-#         <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
-#     {% endfor %}
-#     </ul>
-# {% else %}
-#     <p>No polls are available.</p>
-# {% endif %} -->
