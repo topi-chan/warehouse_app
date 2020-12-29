@@ -22,13 +22,13 @@
     <div class="column col-lg-auto col-6">
 <p>
 <span class="label label-rounded label-primary">Kup lub sprzedaj produkt</span>
-  <form method="POST" action="zakup" >{% csrf_token %}
+  <form method="POST" action="hub" >{% csrf_token %}
         <div class="form-group">
               <div class="col-6 col-sm-12">
-        <select class="form-select">
+        <select name="wybor" class="form-select">
           <option>Wybierz działanie</option>
-          <option>Zakup</option>
-          <option>Sprzedaż</option>
+          <option value="zakup">Zakup</option>
+          <option value="sprzedaz">Sprzedaż</option>
         </select>
         <label class="form-label" for="input-example-1">Nazwa</label>
 <input class="form-input" name="nazwa" type="text" id="input-example-1" placeholder="Nazwa produktu">
@@ -41,6 +41,8 @@
 <button class="btn" type="submit">Wykonaj</button>
 </form>
 </p>
+<br>
+{{error}}
 <br><br>
 <form method="POST" action="saldo" >{% csrf_token %}
   <span class="label label-rounded label-primary">Zmień saldo firmy</span>
