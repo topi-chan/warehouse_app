@@ -41,8 +41,6 @@
 <button class="btn" type="submit">Wykonaj</button>
 </form>
 </p>
-<br>
-{{error}}
 <br><br>
 <form method="POST" action="saldo" >{% csrf_token %}
   <span class="label label-rounded label-primary">Zmień saldo firmy</span>
@@ -68,7 +66,7 @@
      <p>
         <span class="label label-primary">{{saldo}} zł</span>
         <br><br>
-        <a href="https://google.com" class="button"><button class="btn">Odśwież</button></a>
+        <a href="/manager/review" class="button"><button class="btn">Wyświetl przegląd</button></a>
 
      </p>
 <br><br>
@@ -85,8 +83,10 @@
       {% else %}
         <p>Brak produktów w magazynie.</p>
       {% endif %}
-        <a href="https://google.com" class="button"><button class="btn">Odśwież</button></a>
+      <a href="/manager/review" class="button"><button class="btn">Wyświetl przegląd</button></a>
       </p>
+      <br><br><br>
+      <p style="color: red;font-size:36px"><b>{{error}}</b></p>
      </div>
 </div>
 </div>

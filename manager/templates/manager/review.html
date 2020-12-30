@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>System magazynowy</title>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+</head>
+<body>
+  <div class="hero bg-primary">
+    <div class="hero-body">
+      <h1 style="text-align: center;">System do zarządzania stanami magazynowymi</h1>
+      <p style="text-align: center;">Umożliwia przegląd salda, stanu magazynowego oraz zarządzanie sprzedażą i zakupem w przedsiębiorstwie</p>
+    </div>
+  </div>
+<br><br>
+     <p>
+       <span class="label label-rounded label-primary">Wykonane akcje</span>
+     </p>
+<br><br>
+      <p>
+      {% if przeglad %}
+        <ul>
+          {% for item in przeglad %}
+            <li>{{ item.storage_log.name }}  {{ item.storage_log.price }}
+            {{ item.storage_log.qty }}  {{ item.storage_log.action_type }}
+          {{ item.balance.current }}  {{ item.balance.commentary }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Brak akcji do wyświetlenia.</p>
+      {% endif %}
+      </ul>
+      </p>
+      <br><br><a href="/manager" class="button"><button class="btn">Strona główna</button></a>
+
+</body>
+</html>
