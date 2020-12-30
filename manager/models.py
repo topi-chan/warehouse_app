@@ -3,7 +3,8 @@ from django.db import models
 class StorageLog(models.Model):
     item = models.ForeignKey('Storage', on_delete=models.PROTECT, null=True)
     price = models.IntegerField()
-    qty = models.IntegerField()
+#    qty = models.IntegerField()
+    action_type = models.CharField(max_length=800, default=None)
 
 class Balance(models.Model):
     'saldo'
