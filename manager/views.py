@@ -78,15 +78,14 @@ def sprzedaz(request):
         Storage.objects.filter(name=request.POST['nazwa']).update(qty=qty1)
         log_add = StorageLog(name = request.POST['nazwa'], qty = pieces,
             price = price, action_type = "sprzedaż")
-        if qty1 == 0:
-            log_add.delete()
-            return redirect('index')
         log_add.save()
         balance_total = Balance.objects.last()
         balance_total.sum = balance_total.sum + (price*pieces)
         balance_total.save()
         log = Overview(storage_log = log_add)
         log.save()
+        if qty1 == 0:
+            goods_object.delete()
         return redirect('index')
     else:
         request.session['error'] = "Brak produktu w magazynie"
