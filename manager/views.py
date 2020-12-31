@@ -72,9 +72,15 @@ def sprzedaz(request):
     if Storage.objects.filter(name = request.POST['nazwa']).exists():
         goods_object = Storage.objects.get(name = request.POST['nazwa'])
         qty1 = goods_object.qty - pieces
+        if qty1 < 0:
+            request.session['error'] = "Brak tylu produktów w magazynie"
+            return redirect('index')
         Storage.objects.filter(name=request.POST['nazwa']).update(qty=qty1)
         log_add = StorageLog(name = request.POST['nazwa'], qty = pieces,
             price = price, action_type = "sprzedaż")
+        if qty1 == 0:
+            log_add.delete()
+            return redirect('index')
         log_add.save()
         balance_total = Balance.objects.last()
         balance_total.sum = balance_total.sum + (price*pieces)
